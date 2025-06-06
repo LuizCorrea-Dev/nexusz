@@ -1,0 +1,73 @@
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 0.75rem;
+  padding: 2rem; /* 32px = 2rem */
+  width: 21.25rem; /* 340px / 16 = 21.25rem */
+  height: 21.25rem; /* 340px / 16 = 21.25rem */
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.content {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+/* Listas dentro dos cards */
+.content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content li {
+  margin-bottom: 0.5rem; /* Espaçamento entre os itens */
+  line-height: 1.6; /* Linha mais alta */
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 0.125rem solid #00ff99; /* 2px */
+  border-radius: 0.5rem; /* 8px */
+  background: none;
+  color: #00ff99;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #00ff99;
+  color: #0d0d0d;
+}
+
+/* Estilo Steam */
+.steam {
+  border-color: #1b2838;
+  color: #5d87bb;
+}
+
+.steam:hover {
+  background-color: #1b2838;
+  color: #ffffff;
+}
+
+/* Estilo Discord */
+.discord {
+  border-color: #7289da;
+  color: #7289da;
+}
+
+.discord:hover {
+  background-color: #7289da;
+  color: #ffffff;
+}
