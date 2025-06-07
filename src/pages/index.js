@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
-import homeStyles from "../styles/Home.module.css";
+import homeStyles from "../styles/home.module.css";
 
 export default function Home() {
   return (

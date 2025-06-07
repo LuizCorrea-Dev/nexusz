@@ -12,7 +12,6 @@ export default function SlideBG({ theme }) {
     let interval;
 
     if (theme === "dayz") {
-      // Define a variável CSS com a imagem atual
       document.documentElement.style.setProperty(
         "--background-image",
         `url(${dayzImages[currentImage]})`
@@ -20,9 +19,8 @@ export default function SlideBG({ theme }) {
 
       interval = setInterval(() => {
         setCurrentImage((prevImage) => (prevImage + 1) % dayzImages.length);
-      }, 5000); // Troca a cada 5 segundos
+      }, 5000);
     } else {
-      // Se não for tema DayZ, remove a imagem
       document.documentElement.style.setProperty("--background-image", "none");
     }
 

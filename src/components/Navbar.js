@@ -1,7 +1,7 @@
-import styles from "../styles/Navbar.module.css";
+import styles from "../styles/navbar.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import SlideBG from "./SlideBG"; // Importa o novo componente!
+import SlideBG from "./SlideBG";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("discord");

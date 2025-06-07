@@ -1,11 +1,10 @@
 import Card from "../components/Card";
-import styles from "../styles/Home.module.css"; // importa os estilos da Home!
+import styles from "../styles/home.module.css";
 
 export default function CardContent() {
   return (
     <div className={styles.cardsRow}>
       {" "}
-      {/* Novo estilo aqui */}
       <Card
         title="Servidor"
         content={
