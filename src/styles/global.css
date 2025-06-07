@@ -47,6 +47,10 @@ body {
   position: relative;
 }
 
+[data-theme="dayz"] body {
+  background-color: transparent;
+}
+
 body::before {
   content: "";
   position: fixed;
