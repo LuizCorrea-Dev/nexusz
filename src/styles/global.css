@@ -1,14 +1,14 @@
 :root {
-  /* Discord Theme (Default) */
-  --bg-color: #121212; /* fundo cinza Discord */
+  /* Dark Theme (Default) */
+  --bg-color: #121212; /* fundo cinza Dark */
   --text-color: #ffffff;
-  --primary-color: #7289da; /* azul Discord */
+  --primary-color: #7289da; /* azul Dark */
   --card-bg: #23272a; /* fundo dos cards */
   --border-color: #99aab5;
   --scrollbar-thumb: #7289da;
   --selection-bg: #7289da;
   --selection-text: #ffffff;
-  --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Discord Font */
+  --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Dark Font */
   --letter-spacing: 0em;
 }
 

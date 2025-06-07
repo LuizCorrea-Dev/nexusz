@@ -4,16 +4,16 @@ import { useEffect, useState } from "react";
 import SlideBG from "./SlideBG";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("discord");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "discord";
+    const savedTheme = localStorage.getItem("theme") || "dark";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "discord" ? "dayz" : "discord";
+    const newTheme = theme === "dark" ? "dayz" : "dark";
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
@@ -42,7 +42,7 @@ export default function Navbar() {
           </li>
         </ul>
         <button onClick={toggleTheme} className={styles.themeToggle}>
-          {theme === "discord" ? "☠️ DayZ" : "💬 Discord"}
+          {theme === "dark" ? "☠️ DayZ" : "🌙 Dark"}
         </button>
       </nav>
     </>
