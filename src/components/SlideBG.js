@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const dayzImages = Array.from(
   { length: 19 },
-  (_, i) => `/wallpaper_NexusZ/nexus_dayz%20%28${i + 1}%29.png`
+  (_, i) => `/wallpaper_nexusZ/nexus_dayz%20%28${i + 1}%29.png`
 );
 
 export default function SlideBG({ theme }) {
