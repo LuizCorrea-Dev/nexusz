@@ -13,11 +13,10 @@ export default function Lore() {
         const text = paragraph.innerText;
         paragraph.innerHTML = "";
 
-        text.split("").forEach((char) => {
+        text.split("").forEach((char, index) => {
           const span = document.createElement("span");
           span.innerText = char;
 
-          // 15% de chance de aplicar glitch em cada letra
           // Inicialmente, aplica glitch
           if (Math.random() < 0.15 && char !== " ") {
             span.classList.add(styles.glitchChar);
@@ -30,6 +29,7 @@ export default function Lore() {
           paragraph.appendChild(span);
         });
       });
+
       // Remove glitch depois de 1 segundo
       setTimeout(() => {
         const glitchChars = document.querySelectorAll(`.${styles.glitchChar}`);
