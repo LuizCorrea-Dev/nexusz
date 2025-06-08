@@ -62,13 +62,18 @@
   max-width: 900px;
   margin: 100px auto 0;
   padding: 2rem;
-  line-height: 1.8; /* Espaçamento mais confortável */
-  text-align: justify; /* Justificar o texto */
+  line-height: 1.8; /* Espaçamento entre linhas */
+  text-align: justify;
   color: #eee;
   font-size: 1.1rem;
 }
 
-/* Efeito de Glitch */
+/* Espaçamento duplo entre parágrafos */
+.loreContent p {
+  margin-bottom: 2rem;
+}
+
+/* Animação de Glitch - Tremedeira */
 @keyframes glitchEffect {
   0% {
     transform: translate(0, 0);
@@ -94,4 +99,16 @@
   display: inline-block;
   animation: glitchEffect 0.5s infinite alternate;
   color: #00ff99;
+}
+
+/* Estilo para letras digitadas */
+.typedChar {
+  opacity: 0;
+  animation: typing 3s steps(40) forwards;
+}
+
+@keyframes typing {
+  to {
+    opacity: 1;
+  }
 }

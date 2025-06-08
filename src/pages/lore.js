@@ -18,13 +18,25 @@ export default function Lore() {
           span.innerText = char;
 
           // 15% de chance de aplicar glitch em cada letra
+          // Inicialmente, aplica glitch
           if (Math.random() < 0.15 && char !== " ") {
             span.classList.add(styles.glitchChar);
           }
 
+          // Adiciona class para digitado com steps
+          span.classList.add(styles.typedChar);
+          span.style.animationDelay = `${index * 0.05}s`; // Efeito de digitação
+
           paragraph.appendChild(span);
         });
       });
+      // Remove glitch depois de 1 segundo
+      setTimeout(() => {
+        const glitchChars = document.querySelectorAll(`.${styles.glitchChar}`);
+        glitchChars.forEach((el) => {
+          el.classList.remove(styles.glitchChar);
+        });
+      }, 1000);
     }
   }, []);
 
