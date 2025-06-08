@@ -11,16 +11,6 @@
   margin-top: 1rem;
   text-align: left;
 }
-
-.loreList {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
 .btn {
   display: inline-block;
   margin-top: 1rem;
