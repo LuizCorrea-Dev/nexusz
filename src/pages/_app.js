@@ -8,21 +8,24 @@ export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Ativa o loader apenas no client-side
     if (typeof window !== "undefined") {
-      setLoading(true);
+      if (!sessionStorage.getItem("loadedOnce")) {
+        setLoading(true);
 
-      // Apenas dispara o loader por 5s
-      const timer = setTimeout(() => {
+        const timer = setTimeout(() => {
+          setLoading(false);
+          sessionStorage.setItem("loadedOnce", "true"); // 🔥 marca que já carregou uma vez
+        }, 5000); // 5 segundos
+
+        return () => clearTimeout(timer);
+      } else {
         setLoading(false);
-      }, 5000); // 5 segundos pra não travar
-
-      return () => clearTimeout(timer);
+      }
     }
   }, []);
 
   if (loading) {
-    return <Loader onFinish={() => setLoading(false)} />;
+    return <Loader />;
   }
 
   return <Component {...pageProps} />;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
@@ -24,13 +24,13 @@ export default function Home() {
           <p className={homeStyles.tagline}>
             "No fim, a esperança não morreu. Ela apenas mudou de forma."
           </p>
+          {/* ⚡ Matrix effect só no Home */}
           <RandomCharacterAnimation targetId="matrixHome" />
         </div>
         <div className={homeStyles.cardsContainer}>
           <CardContent />
         </div>
       </main>
-
       <Footer />
     </>
   );
