@@ -1,7 +1,7 @@
 import "../styles/home.module.css";
 import "../styles/card.module.css";
 import { SessionProvider } from "next-auth/react";
-import "../styles/globals.css";
+import "../styles/global.css";
 
 export default function App({
   Component,
