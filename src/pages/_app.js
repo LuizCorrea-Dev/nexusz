@@ -14,8 +14,8 @@ export default function App({ Component, pageProps }) {
 
         const timer = setTimeout(() => {
           setLoading(false);
-          sessionStorage.setItem("loadedOnce", "true"); // 🔥 marca que já carregou uma vez
-        }, 5000); // 5 segundos
+          sessionStorage.setItem("loadedOnce", "true"); // Marca que já carregou uma vez
+        }, 5500); // Tempo do loader + delay
 
         return () => clearTimeout(timer);
       } else {

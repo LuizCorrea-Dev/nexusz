@@ -43,7 +43,7 @@ export default function RandomCharacterAnimation({ targetId = "matrixHome" }) {
     }, 300);
 
     setTimeout(() => {
-      titleElement.classList.remove("glitch"); // Remove glitch rápido
+      titleElement.classList.remove("glitch");
     }, 1000);
 
     setTimeout(() => {
@@ -52,9 +52,9 @@ export default function RandomCharacterAnimation({ targetId = "matrixHome" }) {
     }, 3000);
 
     return () => {
-      clearInterval(interval); // Clean up se desmontar
+      clearInterval(interval);
     };
   }, [targetId]);
 
-  return null; // Componente de efeito — não renderiza nada
+  return null;
 }

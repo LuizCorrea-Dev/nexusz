@@ -1,12 +1,11 @@
+"use client";
 import { useEffect } from "react";
 
 export default function Loader({ onFinish }) {
   useEffect(() => {
-    if (typeof window === "undefined") return; // 🔒 Safe para SSR
+    if (typeof window === "undefined") return;
 
     const canvas = document.getElementById("loaderCanvas");
-    if (!canvas) return; // Se ainda não carregou
-
     const ctx = canvas.getContext("2d");
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
@@ -31,7 +30,7 @@ export default function Loader({ onFinish }) {
 
       setColor() {
         if (this.percentage === 100) {
-          this.color = "#1E90FF";
+          this.color = "#1E90FF"; // Azul quando 100%
         }
       },
 
@@ -101,10 +100,10 @@ export default function Loader({ onFinish }) {
     let range = 10;
     let speed = 0.03;
     let t = 0;
-    const duration = 5; // 5 segundos
+    const duration = 5; // Duração de 5 segundos
 
     function loop() {
-      t += 100 / (duration * 30);
+      t += 100 / (duration * 30); // 30fps approx
       progressCircle.calcPercent(t);
       progressCircle.setColor();
       progressCircle.draw();
@@ -113,7 +112,7 @@ export default function Loader({ onFinish }) {
         requestAnimationFrame(loop);
       } else {
         if (onFinish) {
-          onFinish();
+          setTimeout(onFinish, 500); // Delay de 500ms para suavizar
         }
       }
     }
@@ -143,7 +142,7 @@ export default function Loader({ onFinish }) {
         left: 0,
         width: "100vw",
         height: "100vh",
-        background: "#111",
+        background: "#111", // Cor de fundo escura
         zIndex: 9999,
         opacity: 1,
         pointerEvents: "none",

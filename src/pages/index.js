@@ -6,8 +6,6 @@ import homeStyles from "../styles/home.module.css";
 import RandomCharacterAnimation from "../utils/RandomCharacterAnimation";
 
 export default function Home() {
-  const [theme, setTheme] = useState("dark");
-
   return (
     <>
       <Navbar />
@@ -24,7 +22,7 @@ export default function Home() {
           <p className={homeStyles.tagline}>
             "No fim, a esperança não morreu. Ela apenas mudou de forma."
           </p>
-          {/* Matrix Animation só na Home */}
+          {/* 🔥 Só Matrix aqui */}
           <RandomCharacterAnimation targetId="matrixHome" />
         </div>
         <div className={homeStyles.cardsContainer}>
