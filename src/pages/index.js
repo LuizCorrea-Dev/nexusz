@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
@@ -6,16 +6,35 @@ import homeStyles from "../styles/home.module.css";
 import RandomCharacterAnimation from "../utils/RandomCharacterAnimation";
 
 export default function Home() {
+  const [theme, setTheme] = useState("dark");
+
   useEffect(() => {
-    const animation = new RandomCharacterAnimation({
-      d_element: "#matrixHome",
-      d_kerning: 8000,
-      d_min: 25,
-      d_max: 100,
-    });
-    animation.start();
-    setTimeout(() => animation.stop(), 3000);
-  }, []); // somente no carregamento
+    if (typeof window !== "undefined") {
+      const titleElement = document.getElementById("matrixHome");
+      if (!titleElement) return;
+
+      titleElement.classList.add(homeStyles.inactiveMatrix);
+
+      const animation = new RandomCharacterAnimation({
+        d_element: "#matrixHome",
+        d_kerning: 8000,
+        d_min: 25,
+        d_max: 100,
+      });
+
+      animation.start();
+
+      setTimeout(() => {
+        titleElement.classList.remove(homeStyles.inactiveMatrix);
+        titleElement.classList.add(homeStyles.matrixActive);
+      }, 300);
+
+      setTimeout(() => {
+        animation.stop();
+        titleElement.classList.remove(homeStyles.matrixActive);
+      }, 3000);
+    }
+  }, [theme]);
 
   return (
     <>

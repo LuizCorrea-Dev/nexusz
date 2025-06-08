@@ -20,6 +20,20 @@
 .title {
   font-size: 3rem;
   margin-bottom: 0.5rem;
+  color: #00ff99;
+  font-weight: bold;
+  transition: opacity 1s ease, filter 1s ease; /* aqui a transição */
+}
+
+/* Efeito extra durante a Matrix Animation */
+.matrixActive {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+.inactiveMatrix {
+  opacity: 0;
+  filter: blur(5px);
 }
 
 .tagline {

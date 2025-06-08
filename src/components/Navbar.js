@@ -22,17 +22,32 @@ export default function Navbar() {
   };
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Anima o título quando abrir o menu
-    if (!menuOpen) {
-      const animation = new RandomCharacterAnimation({
-        d_element: "#matrixNavbar",
-        d_kerning: 8000,
-        d_min: 25,
-        d_max: 100,
-      });
-      animation.start();
-      setTimeout(() => animation.stop(), 3000);
-    }
+    setMenuOpen(!menuOpen);
+    triggerAnimation(); // opcional: anima no abrir do menu
+  };
+
+  const triggerAnimation = () => {
+    const titleElement = document.getElementById("matrixNavbar");
+    if (!titleElement) return;
+
+    titleElement.classList.add(styles.inactiveMatrix);
+
+    const animation = new RandomCharacterAnimation({
+      d_element: "#matrixNavbar",
+      d_kerning: 8000,
+      d_min: 25,
+      d_max: 100,
+    });
+    animation.start();
+    setTimeout(() => {
+      titleElement.classList.remove(styles.inactiveMatrix);
+      titleElement.classList.add(styles.matrixActive);
+    }, 300);
+
+    setTimeout(() => {
+      animation.stop();
+      titleElement.classList.remove(styles.matrixActive);
+    }, 3000);
   };
 
   return (
@@ -45,7 +60,9 @@ export default function Navbar() {
             alt="NEXUS Z Logo"
             className={styles.logo}
           />
-          <span className={styles.title}>NΣXUS Z</span>
+          <span id="matrixNavbar" className={styles.title}>
+            NΣXUS Z
+          </span>
         </div>
 
         <div className={styles.burger} onClick={toggleMenu}>
@@ -54,19 +71,53 @@ export default function Navbar() {
 
         <ul className={`${styles.links} ${menuOpen ? styles.active : ""}`}>
           <li>
-            <Link href="/">Home</Link>
+            <Link
+              href="/"
+              onMouseEnter={triggerAnimation}
+              onFocus={triggerAnimation}
+              onTouchStart={triggerAnimation}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link href="/server">Servidor</Link>
+            <Link
+              href="/server"
+              onMouseEnter={triggerAnimation}
+              onFocus={triggerAnimation}
+              onTouchStart={triggerAnimation}
+            >
+              Servidor
+            </Link>
           </li>
           <li>
-            <Link href="/lore">Lore</Link>
+            <Link
+              href="/lore"
+              onMouseEnter={triggerAnimation}
+              onFocus={triggerAnimation}
+              onTouchStart={triggerAnimation}
+            >
+              Lore
+            </Link>
           </li>
           <li>
-            <Link href="/store">Loja</Link>
+            <Link
+              href="/store"
+              onMouseEnter={triggerAnimation}
+              onFocus={triggerAnimation}
+              onTouchStart={triggerAnimation}
+            >
+              Loja
+            </Link>
           </li>
           <li>
-            <button onClick={toggleTheme} className={styles.themeToggle}>
+            <button
+              onClick={toggleTheme}
+              onMouseEnter={triggerAnimation}
+              onFocus={triggerAnimation}
+              onTouchStart={triggerAnimation}
+              className={styles.themeToggle}
+            >
               {theme === "dark" ? "☠️ DayZ" : "🌙 Dark"}
             </button>
           </li>

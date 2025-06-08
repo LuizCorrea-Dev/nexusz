@@ -66,6 +66,18 @@
   color: #0d0d0d;
 }
 
+.matrixActive {
+  opacity: 1;
+  filter: blur(0px);
+  transition: opacity 1s ease, filter 1s ease;
+}
+
+.inactiveMatrix {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 1s ease, filter 1s ease;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .burger {
