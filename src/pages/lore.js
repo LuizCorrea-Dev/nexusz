@@ -116,7 +116,13 @@ export default function Lore() {
 
         <p>Você está no NΣXUS Z.</p>
 
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "2rem",
+            marginBottom: "4rem",
+          }}
+        >
           <a
             href="/"
             style={{
