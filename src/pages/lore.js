@@ -10,7 +10,7 @@ export default function Lore() {
       const paragraphs = document.querySelectorAll(`.${styles.loreContent} p`);
 
       let totalDelay = 0;
-      const delayPerChar = 0.05; // ⏱️ 50ms por letra
+      const delayPerChar = 0.02; // ⏱️ 50ms por letra
 
       paragraphs.forEach((paragraph) => {
         const text = paragraph.innerText;
