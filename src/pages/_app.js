@@ -8,13 +8,14 @@ export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simula carregamento, ou espere algum evento real
-    setTimeout(() => setLoading(false), 12000); // 12 segundos
+    const timer = setTimeout(() => setLoading(false), 12000); // fallback no tempo
+    return () => clearTimeout(timer); // limpa timeout se desmontar
   }, []);
 
-  if (loading) {
-    return <Loader onFinish={() => setLoading(false)} />;
-  }
-
-  return <Component {...pageProps} />;
+  return (
+    <>
+      {loading && <Loader onFinish={() => setLoading(false)} />}
+      {!loading && <Component {...pageProps} />}
+    </>
+  );
 }
