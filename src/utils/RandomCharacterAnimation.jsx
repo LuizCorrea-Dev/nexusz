@@ -33,7 +33,7 @@ export default function RandomCharacterAnimation({ targetId = "matrixHome" }) {
       titleElement.innerHTML = originalText;
     }
 
-    // ⏳ Start glitch
+    // Start glitch and matrix effect
     startMatrixAnimation();
     titleElement.classList.add("glitch");
 
@@ -52,9 +52,9 @@ export default function RandomCharacterAnimation({ targetId = "matrixHome" }) {
     }, 3000);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval); // Clean up
     };
   }, [targetId]);
 
-  return null;
+  return null; // Esse componente é apenas de efeito — não renderiza nada.
 }
