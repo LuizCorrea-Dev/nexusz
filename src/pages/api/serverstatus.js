@@ -1,11 +1,11 @@
-// src/pages/api/serverStatus.js
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "https://api.battlemetrics.com/servers?filter[search]=172.84.94.147:2450"
+      "https://api.battlemetrics.com/servers?filter[search]=172.84.94.147:2450&page[offset]=10"
     );
     const data = await response.json();
 
+    // Procura pelo servidor correto no resultado
     const server = data.data.find(
       (srv) =>
         srv.attributes.ip === "172.84.94.147" && srv.attributes.port === 2450
@@ -25,9 +25,9 @@ export default async function handler(req, res) {
     let playersCount = attributes.players || 0;
     const maxPlayers = attributes.maxPlayers || 50;
 
-    // Criar valor fake se for online e players < 10
+    // Se online e menos de 10 players, gera fake players entre 5-10
     if (attributes.status === "online" && playersCount < 10) {
-      const fakePlayers = Math.floor(Math.random() * 6) + 5; // 5 ~ 10
+      const fakePlayers = Math.floor(Math.random() * 6) + 5; // 5 a 10
       playersCount = fakePlayers;
     }
 
@@ -35,10 +35,10 @@ export default async function handler(req, res) {
       name: attributes.name,
       ip: attributes.ip,
       port: attributes.port,
-      status: attributes.status, // "online", "restart", "offline"
+      status: attributes.status, // online, restart, offline
       players: `${playersCount}/${maxPlayers}`,
       time: time,
-      lastRestart: attributes.details.lastRestart || "N/A",
+      lastRestart: details.lastRestart || "N/A",
       country: attributes.country || "N/A",
     };
 
