@@ -9,6 +9,9 @@ export default function Lore() {
     if (typeof window !== "undefined") {
       const paragraphs = document.querySelectorAll(`.${styles.loreContent} p`);
 
+      let totalDelay = 0;
+      const delayPerChar = 0.05; // ⏱️ 50ms por letra
+
       paragraphs.forEach((paragraph) => {
         const text = paragraph.innerText;
         paragraph.innerHTML = "";
@@ -22,15 +25,19 @@ export default function Lore() {
             span.classList.add(styles.glitchChar);
           }
 
-          // Adiciona class para digitado com steps
           span.classList.add(styles.typedChar);
-          span.style.animationDelay = `${index * 0.05}s`; // Efeito de digitação
+
+          // ⏳ Adiciona delay por parágrafo acumulado
+          span.style.animationDelay = `${totalDelay + index * delayPerChar}s`;
 
           paragraph.appendChild(span);
         });
+
+        // 🧠 Atualiza totalDelay para o próximo parágrafo
+        totalDelay += text.length * delayPerChar;
       });
 
-      // Remove glitch depois de 1 segundo
+      // Remove glitch depois de 1 segundo (não depende de parágrafo agora)
       setTimeout(() => {
         const glitchChars = document.querySelectorAll(`.${styles.glitchChar}`);
         glitchChars.forEach((el) => {
