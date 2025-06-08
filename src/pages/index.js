@@ -3,7 +3,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
 import homeStyles from "../styles/home.module.css";
-import RandomCharacterAnimation from "../utils/RandomCharacterAnimation";
+import dynamic from "next/dynamic";
+const RandomCharacterAnimation = dynamic(
+  () => import("../utils/RandomCharacterAnimation"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
