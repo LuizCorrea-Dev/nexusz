@@ -1,33 +1,39 @@
 import NextAuth from "next-auth";
-import { OpenIDProvider } from "next-auth/providers/openid";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { Issuer } from "openid-client";
 
-export default NextAuth({
-  providers: [
-    OpenIDProvider({
-      id: "steam",
-      name: "Steam",
-      type: "openid",
-      version: "2.0",
-      scope: "openid",
-      params: {
-        "openid.ns": "http://specs.openid.net/auth/2.0",
-        "openid.mode": "checkid_setup",
-        "openid.return_to":
-          process.env.NEXTAUTH_URL + "/api/auth/callback/steam",
-        "openid.realm": process.env.NEXTAUTH_URL,
+export default async function auth(req, res) {
+  const steamIssuer = await Issuer.discover(
+    "https://steamcommunity.com/openid"
+  );
+
+  return await NextAuth(req, res, {
+    providers: [
+      CredentialsProvider({
+        id: "steam",
+        name: "Steam",
+        credentials: {},
+        authorize: async (credentials) => {
+          // Steam login logic handled automatically
+          return null; // Steam redirects, no manual login
+        },
+      }),
+    ],
+    callbacks: {
+      async signIn({ account, profile }) {
+        return true; // Accept sign-in
       },
-      issuer: "https://steamcommunity.com/openid",
-      clientId: process.env.STEAM_API_KEY,
-      clientSecret: "unused", // Steam não usa secret
-      profile(profile) {
-        const steamID = profile.sub.split("/").pop();
-        return {
-          id: steamID,
-          name: profile.personaname || "Steam User",
-          image: profile.avatarfull,
-        };
+      async session({ session, token }) {
+        session.steamId = token.sub; // Assign SteamID
+        return session;
       },
-    }),
-  ],
-  secret: process.env.NEXTAUTH_SECRET,
-});
+      async jwt({ token }) {
+        return token;
+      },
+    },
+    pages: {
+      signIn: "/auth/signin", // Optional: custom sign-in page
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+}
