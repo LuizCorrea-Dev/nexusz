@@ -5,6 +5,7 @@ import SlideBG from "./SlideBG";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("dark");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "dark";
@@ -19,15 +20,22 @@ export default function Navbar() {
     localStorage.setItem("theme", newTheme);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
-      <SlideBG theme={theme} /> {/* Chama o background dinâmico */}
+      <SlideBG theme={theme} />
       <nav className={styles.navbar}>
         <div className={styles.logo}>
           <img src="/NEXUS_Z-LOGO.png" alt="NEXUS Z Logo" />
-          <span className={styles.title}>NΣXUS Z</span>
         </div>
-        <ul className={styles.links}>
+        <div className={styles.title}>NΣXUS Z</div>
+        <div className={styles.burger} onClick={toggleMenu}>
+          {menuOpen ? "✖" : "☰"}
+        </div>
+        <ul className={`${styles.links} ${menuOpen ? styles.showMenu : ""}`}>
           <li>
             <Link href="/">Home</Link>
           </li>
@@ -40,10 +48,12 @@ export default function Navbar() {
           <li>
             <Link href="/store">Loja</Link>
           </li>
+          <li>
+            <button onClick={toggleTheme} className={styles.themeToggle}>
+              {theme === "dark" ? "☠️ DayZ" : "🌙 Dark"}
+            </button>
+          </li>
         </ul>
-        <button onClick={toggleTheme} className={styles.themeToggle}>
-          {theme === "dark" ? "☠️ DayZ" : "🌙 Dark"}
-        </button>
       </nav>
     </>
   );
