@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import styles from "../styles/home.module.css";
+import LoginButtonSteam from "../components/LoginButtonSteam";
 
 export default function CardContent() {
   const [serverData, setServerData] = useState(null);
@@ -95,22 +96,7 @@ export default function CardContent() {
         buttonText="Acessar Loja"
         buttonLink="/loja"
       />
-      <Card
-        title="Login"
-        content={<></>}
-        buttons={[
-          {
-            text: "Login com Steam",
-            className: "steam",
-            onClick: () => alert("Login Steam ainda não implementado!"),
-          },
-          {
-            text: "Login com Discord",
-            className: "discord",
-            onClick: () => alert("Login Discord ainda não implementado!"),
-          },
-        ]}
-      />
+      <Card title="Login" content={<LoginButtonSteam />} />
       <Card
         title="Lore"
         content={<p>🧬 Conheça a história oficial do servidor NΣXUS Z!</p>}
