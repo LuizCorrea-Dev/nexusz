@@ -2,22 +2,9 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import styles from "../../styles/signin.module.css";
-import { useEffect } from "react";
 
 export default function SignIn() {
   const { data: session, status } = useSession();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      // Log SteamID
-      console.log(
-        "✅ Logado com SteamID:",
-        session.user?.id || "ID não disponível"
-      );
-    } else if (status === "unauthenticated") {
-      console.error("❌ Usuário não está logado!");
-    }
-  }, [session, status]);
 
   return (
     <div className={styles.container}>
