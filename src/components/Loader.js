@@ -2,7 +2,11 @@ import { useEffect } from "react";
 
 export default function Loader({ onFinish }) {
   useEffect(() => {
+    if (typeof window === "undefined") return; // 🔒 Safe para SSR
+
     const canvas = document.getElementById("loaderCanvas");
+    if (!canvas) return; // Se ainda não carregou
+
     const ctx = canvas.getContext("2d");
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
@@ -97,10 +101,10 @@ export default function Loader({ onFinish }) {
     let range = 10;
     let speed = 0.03;
     let t = 0;
-    const duration = 5; // 5 seconds loader
+    const duration = 5; // 5 segundos
 
     function loop() {
-      t += 100 / (duration * 30); // 30fps approx
+      t += 100 / (duration * 30);
       progressCircle.calcPercent(t);
       progressCircle.setColor();
       progressCircle.draw();
@@ -108,7 +112,6 @@ export default function Loader({ onFinish }) {
       if (t < 100) {
         requestAnimationFrame(loop);
       } else {
-        // QUANDO ACABAR:
         if (onFinish) {
           onFinish();
         }
