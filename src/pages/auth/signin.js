@@ -9,7 +9,7 @@ export default function SignIn() {
         <h1 className={styles.title}>🧬 Nexus Z - Login</h1>
         <p className={styles.subtitle}>Sobreviva. Descubra. Conquiste.</p>
         <button
-          onClick={() => signIn("credentials", { callbackUrl: "/" })}
+          onClick={() => signIn("steam", { callbackUrl: "/" })}
           className={styles.steamButton}
         >
           Login com Steam
