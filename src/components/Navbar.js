@@ -30,6 +30,8 @@ export default function Navbar() {
     const titleElement = document.getElementById("matrixNavbar");
     if (!titleElement) return;
 
+    const originalText = "NΣXUS Z";
+
     titleElement.classList.add(styles.inactiveMatrix);
 
     const animation = new RandomCharacterAnimation({
@@ -53,6 +55,9 @@ export default function Navbar() {
 
     setTimeout(() => {
       animation.stop();
+
+      // 🔥 Força resetar o texto correto:
+      titleElement.innerHTML = originalText;
       titleElement.classList.remove(styles.matrixActive);
     }, 3000);
   };

@@ -13,6 +13,8 @@ export default function Home() {
       const titleElement = document.getElementById("matrixHome");
       if (!titleElement) return;
 
+      const originalText = "NΣXUS Z";
+
       titleElement.classList.add(homeStyles.inactiveMatrix);
 
       const animation = new RandomCharacterAnimation({
@@ -37,6 +39,9 @@ export default function Home() {
 
       setTimeout(() => {
         animation.stop();
+
+        // 🔥 Força resetar o texto correto:
+        titleElement.innerHTML = originalText;
         titleElement.classList.remove(homeStyles.matrixActive);
       }, 3000);
     }

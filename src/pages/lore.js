@@ -1,13 +1,37 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import styles from "../styles/lore.module.css";
+
+import { useEffect } from "react";
 
 export default function Lore() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const paragraphs = document.querySelectorAll(`.${styles.loreContent} p`);
+
+      paragraphs.forEach((paragraph) => {
+        const text = paragraph.innerText;
+        paragraph.innerHTML = "";
+
+        text.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.innerText = char;
+
+          // 15% de chance de aplicar glitch em cada letra
+          if (Math.random() < 0.15 && char !== " ") {
+            span.classList.add(styles.glitchChar);
+          }
+
+          paragraph.appendChild(span);
+        });
+      });
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
-      <main
-        style={{ maxWidth: "900px", margin: "100px auto 0", padding: "2rem" }}
-      >
+      <main className={styles.loreContent}>
         <h2>🧬 Lore oficial do servidor: NΣXUS Z</h2>
         <p>
           Em 2027, a humanidade foi abalada por uma epidemia desconhecida. O
@@ -72,7 +96,7 @@ export default function Lore() {
         </p>
 
         <p>Você está no NΣXUS Z.</p>
-        {/* TODO: Colocar toda a lore aqui! */}
+
         <div style={{ textAlign: "center", marginTop: "2rem" }}>
           <a
             href="/"
