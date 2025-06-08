@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Loader({ onFinish }) {
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
     const canvas = document.getElementById("loaderCanvas");
     const ctx = canvas.getContext("2d");
@@ -106,7 +108,10 @@ export default function Loader({ onFinish }) {
       progressCircle.draw();
 
       if (t >= 100) {
-        if (onFinish) onFinish();
+        setVisible(false); // Trigger fade out
+        setTimeout(() => {
+          if (onFinish) onFinish();
+        }, 1000); // 1s fadeout duration
       } else {
         requestAnimationFrame(loop);
       }
@@ -139,6 +144,9 @@ export default function Loader({ onFinish }) {
         height: "100vh",
         background: "#111",
         zIndex: 9999,
+        opacity: visible ? 1 : 0,
+        transition: "opacity 1s ease-in-out",
+        pointerEvents: "none",
       }}
     ></canvas>
   );

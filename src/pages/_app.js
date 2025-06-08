@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "../styles/global.css";
 import "../styles/home.module.css";
 import "../styles/card.module.css";
