@@ -10,7 +10,7 @@ export default function CardContent() {
     async function fetchData() {
       try {
         const origin = window.location.origin;
-        const res = await fetch(`${origin}/api/serverStatus`);
+        const res = await fetch(`${origin}/api/serverstatus`);
         if (!res.ok) throw new Error("Erro na resposta da API");
         const data = await res.json();
         setServerData(data);
@@ -31,7 +31,7 @@ export default function CardContent() {
     status: "online",
     players: "17/50",
     time: "13:58",
-    lastRestart: "2025-06-08T00:15:12.336Z",
+    map: "Chernarus",
     country: "BR",
   };
 
@@ -74,26 +74,16 @@ export default function CardContent() {
               {currentData.status}
             </li>
             <li>
-              <strong>Jogadores:</strong> {currentData.players}
+              <strong>Jogadores:</strong> 🔥 {currentData.players}
             </li>
             <li>
               <strong>Hora:</strong> 🕒 {currentData.time}
             </li>
             <li>
-              <strong>Último Restart:</strong>
-              {currentData.lastRestart !== "N/A"
-                ? new Date(currentData.lastRestart).toLocaleString("pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                  })
-                : "N/A"}
+              <strong>map:</strong> 🗺️ {currentData.map}
             </li>
             <li>
-              <strong>País:</strong> {currentData.country}
+              <strong>País:</strong> 🌎 {currentData.country}
             </li>
           </ul>
         }
