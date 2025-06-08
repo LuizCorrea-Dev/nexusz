@@ -9,7 +9,8 @@ export default function CardContent() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("/api/serverStatus");
+        const origin = window.location.origin;
+        const res = await fetch(`${origin}/api/serverStatus`);
         if (!res.ok) throw new Error("Erro na resposta da API");
         const data = await res.json();
         setServerData(data);
@@ -21,6 +22,27 @@ export default function CardContent() {
 
     fetchData();
   }, []);
+
+  // Gerar bolinha de status
+  const getStatusIndicator = (status) => {
+    let color = "gray";
+    if (status === "online") color = "green";
+    else if (status === "restart") color = "yellow";
+    else if (status === "offline") color = "red";
+
+    return (
+      <span
+        style={{
+          display: "inline-block",
+          width: "10px",
+          height: "10px",
+          borderRadius: "50%",
+          backgroundColor: color,
+          marginRight: "8px",
+        }}
+      ></span>
+    );
+  };
 
   return (
     <div className={styles.cardsRow}>
@@ -37,20 +59,28 @@ export default function CardContent() {
                 <strong>IP:</strong> {serverData.ip}:{serverData.port}
               </li>
               <li>
-                <strong>Status:</strong> {serverData.status}
+                <strong>Status:</strong> {getStatusIndicator(serverData.status)}{" "}
+                {serverData.status}
               </li>
               <li>
                 <strong>Jogadores:</strong> {serverData.players}
               </li>
               <li>
-                <strong>Versão:</strong> {serverData.version}
+                <strong>Hora:</strong> 🕒 {serverData.time}{" "}
+                {/* Mostra hora com ícone */}
               </li>
               <li>
-                <strong>Último Restart:</strong>{" "}
-                {new Date(serverData.lastRestart).toLocaleString()}
-              </li>
-              <li>
-                <strong>Modificado:</strong> {serverData.modded ? "Sim" : "Não"}
+                <strong>Último Restart:</strong>
+                {serverData.lastRestart !== "N/A"
+                  ? new Date(serverData.lastRestart).toLocaleString("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })
+                  : "N/A"}
               </li>
               <li>
                 <strong>País:</strong> {serverData.country}

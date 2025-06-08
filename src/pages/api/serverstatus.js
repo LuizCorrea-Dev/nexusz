@@ -1,3 +1,4 @@
+// src/pages/api/serverStatus.js
 export default async function handler(req, res) {
   try {
     const response = await fetch(
@@ -6,7 +7,8 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     const server = data.data.find(
-      (server) => server.attributes.ip === "172.84.94.147"
+      (srv) =>
+        srv.attributes.ip === "172.84.94.147" && srv.attributes.port === 2450
     );
 
     if (!server) {
@@ -14,22 +16,35 @@ export default async function handler(req, res) {
     }
 
     const attributes = server.attributes;
+    const details = attributes.details || {};
+
+    // Hora do servidor
+    const time = details.time || "00:00";
+
+    // Jogadores
+    let playersCount = attributes.players || 0;
+    const maxPlayers = attributes.maxPlayers || 50;
+
+    // Criar valor fake se for online e players < 10
+    if (attributes.status === "online" && playersCount < 10) {
+      const fakePlayers = Math.floor(Math.random() * 6) + 5; // 5 ~ 10
+      playersCount = fakePlayers;
+    }
 
     const serverStatus = {
       name: attributes.name,
       ip: attributes.ip,
       port: attributes.port,
-      status: attributes.status,
-      players: `${attributes.players}/${attributes.maxPlayers}`,
-      version: attributes.details.version,
-      lastRestart: attributes.details.lastRestart,
-      modded: attributes.details.modded,
-      country: attributes.country,
+      status: attributes.status, // "online", "restart", "offline"
+      players: `${playersCount}/${maxPlayers}`,
+      time: time,
+      lastRestart: attributes.details.lastRestart || "N/A",
+      country: attributes.country || "N/A",
     };
 
     res.status(200).json(serverStatus);
   } catch (error) {
-    console.error("Erro ao buscar dados:", error);
+    console.error("Erro ao buscar dados do servidor:", error);
     res.status(500).json({ error: "Erro ao buscar dados do servidor" });
   }
 }
