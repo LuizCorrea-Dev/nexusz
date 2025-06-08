@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
-import SteamProvider from "next-auth-steam";
+import SteamProvider from "steam-next-auth";
 
 export default NextAuth({
   providers: [
     SteamProvider({
       clientId: process.env.STEAM_API_KEY,
-      clientSecret: "unused", // Steam não precisa de clientSecret
+      clientSecret: "unused", // Steam OpenID não usa secret
       issuer: "https://steamcommunity.com/openid",
     }),
   ],
@@ -18,7 +18,7 @@ export default NextAuth({
     },
     async jwt({ token, account, profile }) {
       if (account?.provider === "steam" && profile) {
-        token.picture = profile.avatar; // Pega o avatar
+        token.picture = profile.avatar;
       }
       return token;
     },
