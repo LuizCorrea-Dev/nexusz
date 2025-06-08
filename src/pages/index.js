@@ -24,10 +24,16 @@ export default function Home() {
 
       animation.start();
 
+      titleElement.classList.add(homeStyles.glitch);
+
       setTimeout(() => {
         titleElement.classList.remove(homeStyles.inactiveMatrix);
         titleElement.classList.add(homeStyles.matrixActive);
       }, 300);
+
+      setTimeout(() => {
+        titleElement.classList.remove(homeStyles.glitch); // Remove glitch
+      }, 1000);
 
       setTimeout(() => {
         animation.stop();

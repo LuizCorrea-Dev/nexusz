@@ -23,7 +23,7 @@ export default function Navbar() {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-    triggerAnimation(); // opcional: anima no abrir do menu
+    triggerAnimation();
   };
 
   const triggerAnimation = () => {
@@ -39,10 +39,17 @@ export default function Navbar() {
       d_max: 100,
     });
     animation.start();
+    // Ativa glitch nos primeiros 1000ms
+    titleElement.classList.add(styles.glitch);
+
     setTimeout(() => {
       titleElement.classList.remove(styles.inactiveMatrix);
       titleElement.classList.add(styles.matrixActive);
     }, 300);
+
+    setTimeout(() => {
+      titleElement.classList.remove(styles.glitch); // Remove glitch após 1s
+    }, 1000);
 
     setTimeout(() => {
       animation.stop();

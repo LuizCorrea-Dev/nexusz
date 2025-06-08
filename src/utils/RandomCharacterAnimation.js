@@ -131,5 +131,16 @@ export default function RandomCharacterAnimation(options) {
 
   this.stop = function () {
     window.cancelAnimationFrame(this.requestId);
+
+    // 🧩 FORÇA RESTAURAR TEXTO FINAL!
+    const elem = document.querySelector(this.options.d_element);
+    if (elem) {
+      elem.innerHTML = this.getLettersArray
+        .map((letter) => {
+          if (letter === " ") return "&nbsp;";
+          return letter;
+        })
+        .join("");
+    }
   };
 }

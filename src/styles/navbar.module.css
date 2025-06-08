@@ -78,6 +78,38 @@
   transition: opacity 1s ease, filter 1s ease;
 }
 
+/* Animação do glitch */
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 2px #ff00c1, -2px -2px #00ffe7;
+    transform: translate(0);
+  }
+  20% {
+    text-shadow: -2px -2px #ff00c1, 2px 2px #00ffe7;
+    transform: translate(1px, -1px);
+  }
+  40% {
+    text-shadow: 2px -2px #ff00c1, -2px 2px #00ffe7;
+    transform: translate(-1px, 1px);
+  }
+  60% {
+    text-shadow: -2px 2px #ff00c1, 2px -2px #00ffe7;
+    transform: translate(1px, 1px);
+  }
+  80% {
+    text-shadow: 2px 2px #ff00c1, -2px -2px #00ffe7;
+    transform: translate(-1px, -1px);
+  }
+  100% {
+    text-shadow: 0 0 #ff00c1, 0 0 #00ffe7;
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  animation: glitch 0.5s infinite;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .burger {
