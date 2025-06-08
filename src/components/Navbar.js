@@ -28,14 +28,20 @@ export default function Navbar() {
     <>
       <SlideBG theme={theme} />
       <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <img src="/NEXUS_Z-LOGO.png" alt="NEXUS Z Logo" />
+        <div className={styles.logoTitle}>
+          <img
+            src="/NEXUS_Z-LOGO.png"
+            alt="NEXUS Z Logo"
+            className={styles.logo}
+          />
+          <span className={styles.title}>NΣXUS Z</span>
         </div>
-        <div className={styles.title}>NΣXUS Z</div>
+
         <div className={styles.burger} onClick={toggleMenu}>
           {menuOpen ? "✖" : "☰"}
         </div>
-        <ul className={`${styles.links} ${menuOpen ? styles.showMenu : ""}`}>
+
+        <ul className={`${styles.links} ${menuOpen ? styles.active : ""}`}>
           <li>
             <Link href="/">Home</Link>
           </li>
