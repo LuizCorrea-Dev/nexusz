@@ -80,7 +80,8 @@ export default function CardContent() {
               <strong>Hora:</strong> 🕒 {currentData.time}
             </li>
             <li>
-              <strong>map:</strong> 🗺️ {currentData.map}
+              <strong>Mapa:</strong> 🗺️{" "}
+              {currentData.map ? currentData.map : "Chernarus"}
             </li>
             <li>
               <strong>País:</strong> 🌎 {currentData.country}
