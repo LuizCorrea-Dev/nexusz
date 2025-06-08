@@ -18,10 +18,7 @@ export default function LoginButtonSteam() {
   }
 
   return (
-    <button
-      onClick={() => signIn("credentials", { callbackUrl: "/" })}
-      className={styles.steamButton}
-    >
+    <button onClick={() => signIn("steam")} className={styles.steamButton}>
       Login com Steam
     </button>
   );
