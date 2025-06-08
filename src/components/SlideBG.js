@@ -11,17 +11,18 @@ export default function SlideBG({ theme }) {
   useEffect(() => {
     let interval;
 
-    if (theme === "dayz") {
-      document.documentElement.style.setProperty(
-        "--background-image",
-        `url(${dayzImages[currentImage]})`
-      );
+    const backgroundSlide = document.getElementById("background-slide");
+
+    if (theme === "dayz" && backgroundSlide) {
+      backgroundSlide.style.backgroundImage = `url(${dayzImages[currentImage]})`;
 
       interval = setInterval(() => {
-        setCurrentImage((prevImage) => (prevImage + 1) % dayzImages.length);
-      }, 5000);
-    } else {
-      document.documentElement.style.setProperty("--background-image", "none");
+        const nextImage = (currentImage + 1) % dayzImages.length;
+        setCurrentImage(nextImage);
+        backgroundSlide.style.backgroundImage = `url(${dayzImages[nextImage]})`;
+      }, 7000);
+    } else if (backgroundSlide) {
+      backgroundSlide.style.backgroundImage = "none";
     }
 
     return () => clearInterval(interval);
