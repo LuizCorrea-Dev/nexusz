@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
@@ -24,7 +24,7 @@ export default function Home() {
           <p className={homeStyles.tagline}>
             "No fim, a esperança não morreu. Ela apenas mudou de forma."
           </p>
-          {/* ⚡ Matrix effect só no Home */}
+          {/* Matrix Animation só na Home */}
           <RandomCharacterAnimation targetId="matrixHome" />
         </div>
         <div className={homeStyles.cardsContainer}>
@@ -34,4 +34,11 @@ export default function Home() {
       <Footer />
     </>
   );
+}
+
+// 🔥 ESSENCIAL — impedir exportação estática
+export async function getServerSideProps() {
+  return {
+    props: {}, // só isso já impede o export
+  };
 }
