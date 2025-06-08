@@ -2,6 +2,7 @@ import styles from "../styles/navbar.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import SlideBG from "./SlideBG";
+import RandomCharacterAnimation from "../utils/RandomCharacterAnimation";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("dark");
@@ -21,7 +22,17 @@ export default function Navbar() {
   };
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen(!menuOpen); // Anima o título quando abrir o menu
+    if (!menuOpen) {
+      const animation = new RandomCharacterAnimation({
+        d_element: "#matrixNavbar",
+        d_kerning: 8000,
+        d_min: 25,
+        d_max: 100,
+      });
+      animation.start();
+      setTimeout(() => animation.stop(), 3000);
+    }
   };
 
   return (
