@@ -62,10 +62,10 @@
   max-width: 900px;
   margin: 100px auto 0;
   padding: 2rem;
-  line-height: 1.8; /* Espaçamento entre linhas */
+  line-height: 2; /* Espaçamento entre linhas */
   text-align: justify;
   color: #eee;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 /* Espaçamento duplo entre parágrafos */
