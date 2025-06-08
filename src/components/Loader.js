@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function Loader() {
+export default function Loader({ onFinish }) {
   useEffect(() => {
     const canvas = document.getElementById("loaderCanvas");
     const ctx = canvas.getContext("2d");
@@ -97,7 +97,7 @@ export default function Loader() {
     let range = 10;
     let speed = 0.03;
     let t = 0;
-    const duration = 12; // seconds
+    const duration = 5; // 5 seconds loader
 
     function loop() {
       t += 100 / (duration * 30); // 30fps approx
@@ -107,6 +107,11 @@ export default function Loader() {
 
       if (t < 100) {
         requestAnimationFrame(loop);
+      } else {
+        // QUANDO ACABAR:
+        if (onFinish) {
+          onFinish();
+        }
       }
     }
 
@@ -124,7 +129,7 @@ export default function Loader() {
     return () => {
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [onFinish]);
 
   return (
     <canvas
