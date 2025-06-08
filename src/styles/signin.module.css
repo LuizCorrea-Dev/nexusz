@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: radial-gradient(circle, #1f1f1f, #111111);
+  padding: 20px;
+}
+
+.loginBox {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00ff99;
+  margin-bottom: 1rem;
+  font-family: "Metal Mania", cursive;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.steamButton {
+  padding: 15px 30px;
+  background-color: transparent;
+  border: 2px solid #4b79ff;
+  border-radius: 8px;
+  color: #4b79ff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.steamButton:hover {
+  background-color: #4b79ff;
+  color: #111;
+}

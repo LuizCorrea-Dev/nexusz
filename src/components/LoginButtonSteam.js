@@ -8,8 +8,8 @@ export default function LoginButtonSteam() {
   if (session) {
     return (
       <div className={styles.loggedInBox}>
-        <img src={session.avatar} alt="Avatar" className={styles.avatar} />
-        <p>Bem-vindo, {session.user?.name || "Usuário Steam"}</p>
+        <img src={session.user.image} alt="Avatar" className={styles.avatar} />
+        <p>Bem-vindo, {session.user.name || "Usuário Steam"}</p>
         <button className={styles.logoutButton} onClick={() => signOut()}>
           Logout
         </button>
@@ -18,7 +18,10 @@ export default function LoginButtonSteam() {
   }
 
   return (
-    <button onClick={() => signIn("steam")} className={styles.steamButton}>
+    <button
+      onClick={() => signIn("credentials", { callbackUrl: "/" })}
+      className={styles.steamButton}
+    >
       Login com Steam
     </button>
   );
