@@ -3,51 +3,50 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CardContent from "../components/CardContent";
 import homeStyles from "../styles/home.module.css";
-import dynamic from "next/dynamic";
-const RandomCharacterAnimation = dynamic(
-  () => import("../utils/RandomCharacterAnimation"),
-  { ssr: false }
-);
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
+    // 🔒 Garante que só rode no browser
     if (typeof window !== "undefined") {
-      const titleElement = document.getElementById("matrixHome");
-      if (!titleElement) return;
+      import("../utils/RandomCharacterAnimation").then((module) => {
+        const RandomCharacterAnimation = module.default;
 
-      const originalText = "NΣXUS Z";
+        const titleElement = document.getElementById("matrixHome");
+        if (!titleElement) return;
 
-      titleElement.classList.add(homeStyles.inactiveMatrix);
+        const originalText = "NΣXUS Z";
 
-      const animation = new RandomCharacterAnimation({
-        d_element: "#matrixHome",
-        d_kerning: 8000,
-        d_min: 25,
-        d_max: 100,
+        titleElement.classList.add(homeStyles.inactiveMatrix);
+
+        const animation = new RandomCharacterAnimation({
+          d_element: "#matrixHome",
+          d_kerning: 8000,
+          d_min: 25,
+          d_max: 100,
+        });
+
+        animation.start();
+
+        titleElement.classList.add(homeStyles.glitch);
+
+        setTimeout(() => {
+          titleElement.classList.remove(homeStyles.inactiveMatrix);
+          titleElement.classList.add(homeStyles.matrixActive);
+        }, 300);
+
+        setTimeout(() => {
+          titleElement.classList.remove(homeStyles.glitch); // Remove glitch
+        }, 1000);
+
+        setTimeout(() => {
+          animation.stop();
+          // 🔥 Força resetar o texto correto:
+          titleElement.innerHTML = originalText;
+          titleElement.classList.remove(homeStyles.matrixActive);
+        }, 3000);
       });
-
-      animation.start();
-
-      titleElement.classList.add(homeStyles.glitch);
-
-      setTimeout(() => {
-        titleElement.classList.remove(homeStyles.inactiveMatrix);
-        titleElement.classList.add(homeStyles.matrixActive);
-      }, 300);
-
-      setTimeout(() => {
-        titleElement.classList.remove(homeStyles.glitch); // Remove glitch
-      }, 1000);
-
-      setTimeout(() => {
-        animation.stop();
-
-        // 🔥 Força resetar o texto correto:
-        titleElement.innerHTML = originalText;
-        titleElement.classList.remove(homeStyles.matrixActive);
-      }, 3000);
     }
   }, [theme]);
 
