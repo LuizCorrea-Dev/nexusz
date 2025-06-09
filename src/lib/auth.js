@@ -4,7 +4,7 @@ import SteamProvider from "@kenjiow/next-auth-steam";
 export const authOptions = {
   providers: [
     SteamProvider({
-      clientSecret: process.env.STEAM_SECRET,
+      clientSecret: process.env.STEAM_API_KEY,
       callbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/callback/steam`,
     }),
   ],
