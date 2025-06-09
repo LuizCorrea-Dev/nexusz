@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: false, // você usa pages router (não app router)
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "steamcdn-a.akamaihd.net",
+        port: "",
+        pathname: "/steamcommunity/public/images/avatars/**",
+      },
+    ],
   },
-  pageExtensions: ["js", "jsx"],
-  reactStrictMode: true,
-  output: "standalone", // ✅ Modo Server Side Rendering
 };
 
 export default nextConfig;

@@ -94,7 +94,7 @@ export default function CardContent() {
         title="Loja"
         content={<p>Em breve: compre itens, skins e upgrades exclusivos!</p>}
         buttonText="Acessar Loja"
-        buttonLink="/loja"
+        buttonLink="/store"
       />
       <Card title="Login" content={<LoginButtonSteam />} />
       <Card
