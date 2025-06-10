@@ -9,7 +9,7 @@ const coinPackages = [
   { id: 2, amount: 1000, price: "R$ 10,00" },
   { id: 3, amount: 5000, price: "R$ 45,00" },
   { id: 4, amount: 10000, price: "R$ 80,00" },
-  { id: 5, amount: 50000, price: "R$ 350,00" },
+  { id: 5, amount: 50000, price: "R$ 250,00" },
 ];
 
 export default function Store() {
