@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "https://api.battlemetrics.com/servers?filter[search]=172.84.94.147:2450&page[offset]=10"
+      "https://api.battlemetrics.com/servers?filter[search]=172.84.94.147:2450"
     );
     const data = await response.json();
 

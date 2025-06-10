@@ -20,8 +20,10 @@ export default function CardContent() {
         setError(true);
       }
     }
-
     fetchData();
+
+    const intervalId = setInterval(fetchData, 60000);
+    return () => clearInterval(intervalId);
   }, []);
 
   // Fallback estático se não tiver dados dinâmicos

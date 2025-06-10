@@ -1,32 +1,32 @@
-// Configuração NextAuth Steam ✅
 import SteamProvider from "@kenjiow/next-auth-steam";
 
 export const authOptions = {
   providers: [
     SteamProvider({
       clientSecret: process.env.STEAM_API_KEY,
-      callbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/callback/steam`,
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account?.provider === "steam" && profile) {
-        token.steam = profile;
+        token.steamid = profile.steamid;
+        token.avatar = profile.avatarfull;
+        token.name = profile.personaname;
       }
       return token;
     },
     async session({ session, token }) {
-      if ("steam" in token) {
-        session.user.steam = token.steam;
-      }
+      session.user.id = token.steamid;
+      session.user.name = token.name;
+      session.user.image = token.avatar;
       return session;
     },
   },
-  session: {
-    strategy: "jwt",
-  },
   pages: {
-    signIn: "/login",
+    signIn: "/auth/signin",
     error: "/auth/error",
   },
   debug: process.env.NODE_ENV === "development",
