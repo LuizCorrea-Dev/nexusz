@@ -1,50 +1,45 @@
-export default async function handler(req, res) {
-  try {
-    const response = await fetch(
-      "https://api.battlemetrics.com/servers?filter[search]=172.84.94.147:2450"
-    );
-    const data = await response.json();
+// pages/api/auth/[...nextauth].js
+import NextAuth from "next-auth";
+// Importe o Steam do novo pacote 'next-auth-steam'
+import Steam from "next-auth-steam";
 
-    // Procura pelo servidor correto no resultado
-    const server = data.data.find(
-      (srv) =>
-        srv.attributes.ip === "172.84.94.147" && srv.attributes.port === 2450
-    );
-
-    if (!server) {
-      return res.status(404).json({ error: "Servidor não encontrado" });
-    }
-
-    const attributes = server.attributes;
-    const details = attributes.details || {};
-
-    // Hora do servidor
-    const time = details.time || "00:00";
-
-    // Jogadores
-    let playersCount = attributes.players || 0;
-    const maxPlayers = attributes.maxPlayers || 50;
-
-    // Se online e menos de 10 players, gera fake players entre 5-10
-    if (attributes.status === "online" && playersCount < 10) {
-      const fakePlayers = Math.floor(Math.random() * 6) + 5; // 5 a 10
-      playersCount = fakePlayers;
-    }
-
-    const serverStatus = {
-      name: attributes.name,
-      ip: attributes.ip,
-      port: attributes.port,
-      status: attributes.status, // online, restart, offline
-      players: `${playersCount}/${maxPlayers}`,
-      time: time,
-      lastRestart: details.lastRestart || "N/A",
-      country: attributes.country || "N/A",
-    };
-
-    res.status(200).json(serverStatus);
-  } catch (error) {
-    console.error("Erro ao buscar dados do servidor:", error);
-    res.status(500).json({ error: "Erro ao buscar dados do servidor" });
-  }
+// O NextAuth espera req e res
+export default async function auth(req, res) {
+  return await NextAuth(req, res, {
+    providers: [
+      // Configure o provedor Steam usando o 'req'
+      Steam(req, {
+        clientSecret: process.env.STEAM_API_KEY, // Use sua variável de ambiente STEAM_API_KEY
+      }),
+    ],
+    session: {
+      strategy: "jwt",
+    },
+    callbacks: {
+      // Estes callbacks são para processar os dados do perfil Steam
+      // que o `next-auth-steam` já formata para você.
+      async jwt({ token, account, profile }) {
+        if (account?.provider === "steam" && profile) {
+          // 'profile.id' é o steamid, 'profile.image' é o avatar, 'profile.name' é o nome
+          token.steamid = profile.id;
+          token.avatar = profile.image;
+          token.name = profile.name;
+        }
+        return token;
+      },
+      async session({ session, token }) {
+        // Atribui os dados do token para a sessão do usuário
+        session.user.id = token.steamid;
+        session.user.name = token.name;
+        session.user.image = token.avatar;
+        return session;
+      },
+    },
+    pages: {
+      signIn: "/auth/signin",
+      error: "/auth/error",
+    },
+    debug: process.env.NODE_ENV === "development",
+    secret: process.env.NEXTAUTH_SECRET, // Não se esqueça do secret!
+  });
 }
