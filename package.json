@@ -9,8 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@kenjiow/next-auth-steam": "^0.6.0",
-    "axios": "^1.9.0",
+    "@hyperplay/next-auth-steam": "^0.2.5",
     "next": "14.2.3",
     "next-auth": "^4.24.11",
     "openid-client": "5.7.1",
