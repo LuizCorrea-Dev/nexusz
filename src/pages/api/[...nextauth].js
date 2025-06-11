@@ -1,7 +1,7 @@
+// src/pages/api/auth/[...nextauth].js
 import NextAuth from "next-auth";
-import Steam from "next-auth-steam";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/lib/auth"; // seu authOptions deve ser uma função
 
-export default async function handler(req, res) {
+export default async function auth(req, res) {
   return await NextAuth(req, res, authOptions(req));
 }
