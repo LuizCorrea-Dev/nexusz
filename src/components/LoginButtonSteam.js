@@ -1,5 +1,4 @@
 "use client";
-// Botão de Login via Steam ✅
 import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "../styles/loginbuttonsteam.module.css";
 
